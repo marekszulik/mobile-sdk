@@ -16,7 +16,7 @@ static NSString *const SPMillennialApId = @"SPMillennialApid";
 // Adapter versioning - Remember to update the header
 static const NSInteger SPMillennialVersionMajor = 2;
 static const NSInteger SPMillennialVersionMinor = 0;
-static const NSInteger SPMillennialVersionPatch = 2;
+static const NSInteger SPMillennialVersionPatch = 3;
 
 @interface SPMillennialNetwork()
 

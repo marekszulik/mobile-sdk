@@ -11,7 +11,6 @@
 #import <MillennialMedia/MMRequest.h>
 #import <MillennialMedia/MMInterstitial.h>
 #import "SponsorPaySDK.h"
-#import "SP_SDK_versions.h"
 #import <CoreLocation/CoreLocation.h>
 @interface SPMillennialInterstitialAdapter ()
 
@@ -87,14 +86,16 @@
     }
     
     MMRequest *request = [MMRequest request];
-        
-#if SP_SDK_MAJOR_RELEASE_VERSION_NUMBER >= 7
-    SPUser *user = [[SponsorPaySDK instance] user];
-    if (user.location) {
-        request.location = user.location;
+    
+    Class SPUserClass = NSClassFromString(@"SPUser");
+    SponsorPaySDK *sponsorPaySDK = [SponsorPaySDK instance];
+    if (SPUserClass && [sponsorPaySDK respondsToSelector:NSSelectorFromString(@"user")]) {
+        id user = [[SponsorPaySDK instance] performSelector:@selector(user)];
+        if ([user respondsToSelector:NSSelectorFromString(@"location")]) {
+            request.location = [user valueForKey:@"location"];
+        }
     }
-#endif
-        
+    
     [MMInterstitial fetchWithRequest:request apid:self.network.apid onCompletion:^(BOOL success, NSError *error) {
         if (error) {
             [self.delegate adapter:self didFailWithError:error];
