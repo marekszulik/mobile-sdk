@@ -4,7 +4,7 @@
 
 | Network | Adapter version | Third party SDK version | Fyber SDK version |
 |:----------:|:-------------:|:-----------------------:|:------------:|
-| Millennial | 2.0.2 | 5.4.1 | 7.0.2 |
+| Millennial | 2.0.3 | 5.4.1 | 7.0.3 + |
 
 ## Example parameters
 

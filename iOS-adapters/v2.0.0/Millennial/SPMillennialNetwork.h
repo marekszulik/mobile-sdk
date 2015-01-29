@@ -12,8 +12,8 @@
  
  ## Version compatibility
  
- - Adapter version: 2.0.2
- - Fyber SDK version: 7.0.2
+ - Adapter version: 2.0.3
+ - Fyber SDK version: 7.0.3
  - Millennial Media SDK version: 5.4.1
  
  */
