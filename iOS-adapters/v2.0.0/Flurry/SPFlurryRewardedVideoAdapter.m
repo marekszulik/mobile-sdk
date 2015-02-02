@@ -20,6 +20,7 @@ static const NSInteger SPFlurryVideoNotReadyErrorCode = -4;
 @property (nonatomic, strong) FlurryAdInterstitial *adInterstitial;
 @property (nonatomic, assign) BOOL isFetchingAd;
 @property (nonatomic, assign) BOOL isVideoFullyWatched;
+@property (nonatomic, assign) BOOL shouldReportAvailability;
 
 @end
 
@@ -36,7 +37,8 @@ static const NSInteger SPFlurryVideoNotReadyErrorCode = -4;
         SPLogError(@"Could not start %@ video Adapter. %@ empty or missing.", self.networkName, SPFlurryVideoAdSpace);
         return NO;
     }
-
+    
+    [self fetchFlurryAd];
     return YES;
 }
 
@@ -45,15 +47,22 @@ static const NSInteger SPFlurryVideoNotReadyErrorCode = -4;
     return self.network.name;
 }
 
+- (void)fetchFlurryAd
+{
+    self.isFetchingAd = YES;
+    self.adInterstitial = [[FlurryAdInterstitial alloc] initWithSpace:self.videoAdsSpace];
+    self.adInterstitial.adDelegate = self;
+    [self.adInterstitial fetchAd];
+}
+
 - (void)checkAvailability
 {
+    self.shouldReportAvailability = YES;
     if (self.adInterstitial.ready) {
+        self.shouldReportAvailability = NO;
         [self.delegate adapter:self didReportVideoAvailable:YES];
     } else if (!self.isFetchingAd) {
-        self.isFetchingAd = YES;
-        self.adInterstitial = [[FlurryAdInterstitial alloc] initWithSpace:self.videoAdsSpace];
-        self.adInterstitial.adDelegate = self;
-        [self.adInterstitial fetchAd];
+        [self fetchFlurryAd];
     }
 }
 
@@ -76,7 +85,10 @@ static const NSInteger SPFlurryVideoNotReadyErrorCode = -4;
 - (void)adInterstitialDidFetchAd:(FlurryAdInterstitial *)interstitialAd
 {
     self.isFetchingAd = NO;
-    [self.delegate adapter:self didReportVideoAvailable:YES];
+    if (self.shouldReportAvailability) {
+        self.shouldReportAvailability = NO;
+        [self.delegate adapter:self didReportVideoAvailable:YES];
+    }
 }
 
 - (void)adInterstitialDidRender:(FlurryAdInterstitial *)interstitialAd
@@ -91,6 +103,8 @@ static const NSInteger SPFlurryVideoNotReadyErrorCode = -4;
     } else {
         [self.delegate adapterVideoDidAbort:self];
     }
+    
+    [self fetchFlurryAd];
 }
 
 
@@ -108,15 +122,21 @@ static const NSInteger SPFlurryVideoNotReadyErrorCode = -4;
     self.isFetchingAd = NO;
     switch (adError) {
     case FLURRY_AD_ERROR_DID_FAIL_TO_FETCH_AD:
-        [self.delegate adapter:self didReportVideoAvailable:NO];
+        if (self.shouldReportAvailability) {
+            self.shouldReportAvailability = NO;
+            [self.delegate adapter:self didReportVideoAvailable:NO];
+        }
         break;
     case FLURRY_AD_ERROR_CLICK_ACTION_FAILED:
     case FLURRY_AD_ERROR_DID_FAIL_TO_RENDER:
     default:
-        [self.delegate adapter:self
-              didFailWithError:[NSError errorWithDomain:SPFlurryErrorDomain
-                                                   code:errorDescription.code
-                                               userInfo:@{ NSLocalizedDescriptionKey:[NSString stringWithFormat:@"Flurry error: %@", errorDescription.localizedDescription]}]];
+        if (self.shouldReportAvailability) {
+            self.shouldReportAvailability = NO;
+            [self.delegate adapter:self
+                  didFailWithError:[NSError errorWithDomain:SPFlurryErrorDomain
+                                                       code:errorDescription.code
+                                                   userInfo:@{ NSLocalizedDescriptionKey:[NSString stringWithFormat:@"Flurry error: %@", errorDescription.localizedDescription]}]];
+        }
         break;
     }
 }
