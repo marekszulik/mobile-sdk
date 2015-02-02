@@ -27,7 +27,7 @@ static NSString *const SPFlurryLogLevelAll = @"all";
 
 // Adapter versioning - Remember to update the header
 static const NSInteger SPFlurryVersionMajor = 2;
-static const NSInteger SPFlurryVersionMinor = 3;
+static const NSInteger SPFlurryVersionMinor = 4;
 static const NSInteger SPFlurryVersionPatch = 0;
 
 
