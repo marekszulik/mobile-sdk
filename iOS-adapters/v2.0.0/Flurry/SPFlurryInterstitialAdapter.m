@@ -107,7 +107,7 @@ static NSString *const SPFlurryInterstitialAdSpace = @"SPFlurryAdSpaceInterstiti
 {
     self.isFetchingAd = NO;
     if (adError == FLURRY_AD_ERROR_DID_FAIL_TO_FETCH_AD) {
-        SPLogDebug(@"Flurry failed to fetch ad ");
+        SPLogError(@"Flurry failed to fetch interstitial");
     } else {
         NSError *interstitialError =
         [NSError errorWithDomain:@"com.sponsorpay.interstitialError"
