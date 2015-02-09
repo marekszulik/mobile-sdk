@@ -1,5 +1,10 @@
 # Flurry for Advertisers - adapter changelog
 
+####2.4.1
+
+- Improved pre-caching logic for the rewarded video mediation adapter
+- Fixed a bug which could cause unexpected behaviour in case of a rendering error or a click action error from Flurry
+
 ####2.4.0
 
 - Added pre-caching to the rewarded video mediation adapter

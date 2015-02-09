@@ -20,7 +20,6 @@ static const NSInteger SPFlurryVideoNotReadyErrorCode = -4;
 @property (nonatomic, strong) FlurryAdInterstitial *adInterstitial;
 @property (nonatomic, assign) BOOL isFetchingAd;
 @property (nonatomic, assign) BOOL isVideoFullyWatched;
-@property (nonatomic, assign) BOOL shouldReportAvailability;
 
 @end
 
@@ -57,11 +56,9 @@ static const NSInteger SPFlurryVideoNotReadyErrorCode = -4;
 
 - (void)checkAvailability
 {
-    self.shouldReportAvailability = YES;
-    if (self.adInterstitial.ready) {
-        self.shouldReportAvailability = NO;
-        [self.delegate adapter:self didReportVideoAvailable:YES];
-    } else if (!self.isFetchingAd) {
+    BOOL isInterstitialReady = self.adInterstitial.ready;
+    [self.delegate adapter:self didReportVideoAvailable:isInterstitialReady];
+    if (!isInterstitialReady && !self.isFetchingAd) {
         [self fetchFlurryAd];
     }
 }
@@ -85,10 +82,6 @@ static const NSInteger SPFlurryVideoNotReadyErrorCode = -4;
 - (void)adInterstitialDidFetchAd:(FlurryAdInterstitial *)interstitialAd
 {
     self.isFetchingAd = NO;
-    if (self.shouldReportAvailability) {
-        self.shouldReportAvailability = NO;
-        [self.delegate adapter:self didReportVideoAvailable:YES];
-    }
 }
 
 - (void)adInterstitialDidRender:(FlurryAdInterstitial *)interstitialAd
@@ -120,22 +113,21 @@ static const NSInteger SPFlurryVideoNotReadyErrorCode = -4;
       errorDescription:(NSError *)errorDescription
 {
     self.isFetchingAd = NO;
+    SPLogError(@"Flurry error:\ncode: %d\ntype: %d\ndescription: %@", errorDescription.code, adError, errorDescription.localizedDescription);
+    
     switch (adError) {
     case FLURRY_AD_ERROR_DID_FAIL_TO_FETCH_AD:
-        if (self.shouldReportAvailability) {
-            self.shouldReportAvailability = NO;
-            [self.delegate adapter:self didReportVideoAvailable:NO];
-        }
+        SPLogError(@"Flurry failed to fetch rewarded video");
         break;
     case FLURRY_AD_ERROR_CLICK_ACTION_FAILED:
     case FLURRY_AD_ERROR_DID_FAIL_TO_RENDER:
     default:
-        if (self.shouldReportAvailability) {
-            self.shouldReportAvailability = NO;
-            [self.delegate adapter:self
-                  didFailWithError:[NSError errorWithDomain:SPFlurryErrorDomain
-                                                       code:errorDescription.code
-                                                   userInfo:@{ NSLocalizedDescriptionKey:[NSString stringWithFormat:@"Flurry error: %@", errorDescription.localizedDescription]}]];
+        {
+            NSError *rvError =
+            [NSError errorWithDomain:SPFlurryErrorDomain
+                                code:errorDescription.code
+                            userInfo:@{ NSLocalizedDescriptionKey: [NSString stringWithFormat:@"Flurry error: %@", errorDescription.localizedDescription]}];
+            [self.delegate adapter:self didFailWithError:rvError];
         }
         break;
     }
