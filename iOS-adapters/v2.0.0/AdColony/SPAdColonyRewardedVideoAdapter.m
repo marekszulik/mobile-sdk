@@ -14,6 +14,8 @@
 #define LogInvocation SPLogDebug(@"%s", __PRETTY_FUNCTION__)
 #endif
 
+static NSString *const SPAdColonyV4VCRewardSupportErrorDescription = @"The following `ZoneId`: %@ for the %@ V4VC adapter should support virtual currency reward. Please check the settings of the rewarded video adapter.";
+
 typedef NS_ENUM(NSInteger, SPAdColonyRewardState) {
     SPAdColonyRewardUnknown,
     SPAdColonyRewardSuccessful,
@@ -52,6 +54,16 @@ typedef NS_ENUM(NSInteger, SPAdColonyRewardState) {
 
 - (void)checkAvailability
 {
+    if (self.videoAvailable && ![AdColony isVirtualCurrencyRewardAvailableForZone:self.zoneId]) {
+        NSString *description = [NSString stringWithFormat:SPAdColonyV4VCRewardSupportErrorDescription, self.zoneId, self.networkName];
+        SPLogError(@"%@", description);
+        NSError *error = [NSError errorWithDomain:@"com.sponsorpay.rewardedVideoError"
+                                             code:-1
+                                         userInfo:@{NSLocalizedDescriptionKey:description}];
+        [self.delegate adapter:self didFailWithError:error];
+        return;
+    }
+    
     [self.delegate adapter:self didReportVideoAvailable:self.videoAvailable];
 }
 
@@ -63,7 +75,8 @@ typedef NS_ENUM(NSInteger, SPAdColonyRewardState) {
     [AdColony playVideoAdForZone:self.zoneId withDelegate:self];
 }
 
-#pragma mark - AdColonyDelegate Methods
+#pragma mark - AdColonyDelegate methods
+
 - (void)onAdColonyAdAvailabilityChange:(BOOL)available inZone:(NSString *)zoneID
 {
     LogInvocation;
@@ -72,7 +85,11 @@ typedef NS_ENUM(NSInteger, SPAdColonyRewardState) {
         SPLogWarn(@"zoneId received is different than the one requested by the ad");
         return;
     }
-
+    
+    if (available && ![AdColony isVirtualCurrencyRewardAvailableForZone:self.zoneId]) {
+        SPLogError(SPAdColonyV4VCRewardSupportErrorDescription, self.zoneId, self.networkName);
+    }
+    
     self.videoAvailable = available;
 }
 
@@ -90,6 +107,7 @@ typedef NS_ENUM(NSInteger, SPAdColonyRewardState) {
 }
 
 #pragma mark - AdColonyAdDelegate methods
+
 - (void)onAdColonyAdStartedInZone:(NSString *)zoneID
 {
     LogInvocation;
@@ -116,7 +134,6 @@ typedef NS_ENUM(NSInteger, SPAdColonyRewardState) {
         [self notifyWebView];
     } else {
         [self.delegate adapterVideoDidAbort:self];
-        return;
     }
 }
 

@@ -14,6 +14,8 @@
 #define LogInvocation SPLogDebug(@"%s", __PRETTY_FUNCTION__)
 #endif
 
+static NSString *const SPAdColonyInterstitialRewardSupportErrorDescription = @"The following `ZoneId`: %@ for the %@ interstitial adapter should not support virtual currency reward. Please check the settings of the interstitial adapter.";
+
 @interface SPAdColonyInterstitialAdapter()
 
 @property (nonatomic, weak) id<SPInterstitialNetworkAdapterDelegate> delegate;
@@ -72,7 +74,7 @@
     }
 }
 
-#pragma mark - AdColonyDelegate Methods
+#pragma mark - AdColonyAdDelegate methods
 
 // Is called when AdColony has taken control of the device screen and is about to begin showing an ad
 - (void)onAdColonyAdStartedInZone:(NSString *)zoneID
@@ -133,7 +135,17 @@
             break;
         case ADCOLONY_ZONE_STATUS_ACTIVE:
             SPLogDebug(@"The zone has completed preparing ads for display for %@ interstitial adapter.", self.networkName);
-            isAvailable = YES;
+            if ([AdColony isVirtualCurrencyRewardAvailableForZone:self.zoneId]) {
+                NSString *description = [NSString stringWithFormat:SPAdColonyInterstitialRewardSupportErrorDescription, self.zoneId, self.networkName];
+                SPLogError(@"%@", description);
+                NSError *error = [NSError errorWithDomain:SPInterstitialClientErrorDomain
+                                                     code:-1
+                                                 userInfo:@{SPInterstitialClientErrorLoggableDescriptionKey:description}];
+                [self.delegate adapter:self didFailWithError:error];
+            }
+            else {
+                isAvailable = YES;
+            }
             break;
         case ADCOLONY_ZONE_STATUS_UNKNOWN:
             SPLogDebug(@"%@ has not yet received the zone's configuration from the server.", self.networkName);
