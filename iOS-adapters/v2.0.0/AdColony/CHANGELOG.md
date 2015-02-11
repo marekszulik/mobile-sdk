@@ -1,5 +1,9 @@
 # AdColony - adapter changelog
 
+####2.1.4
+
+- Fixed behaviour when the V4VC zone doesn't support virtual currency reward
+
 ####2.1.3
 
  - Fixed behaviour of error reporting

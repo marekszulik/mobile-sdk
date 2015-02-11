@@ -1,10 +1,12 @@
 # AdColony  - adapter info
 
+***<font color='red'>This is a recommended update</font>***
+
 ## Compatibililty
 
 | Network | Adapter version | Third party SDK version | Fyber SDK version |
 |:----------:|:-------------:|:-----------------------:|:------------:|
-| AdColony | 2.1.3 | 2.4.13 | 7.0.3 + |
+| AdColony | 2.1.4 | 2.4.13 | 7.0.3 + |
 
 ## Example parameters
 
