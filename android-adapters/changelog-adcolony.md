@@ -1,6 +1,6 @@
 #AdColony current versions:
 
-Adapter: 1.1.
+Adapter: 1.1.3
 
 Fyber SDK: 7.1.0
 
