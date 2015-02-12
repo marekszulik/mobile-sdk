@@ -1,12 +1,17 @@
 #AdColony current versions:
 
-Adapter: 1.1.2
+Adapter: 1.1.3
 
-Fyber SDK: 7.0.2
+Fyber SDK: 7.1.0
 
 AdColony SDK: 2.2.0
 
 #Changelog
+
+####1.1.3
+
+- Fixed issue regarding mixing up zone IDs.
+- Fix for crash while showing interstitial ads in some circumstances (ie. provided V4VC zone ID, using both kind of ads within one integration).
 
 ####1.1.2
 
