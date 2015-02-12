@@ -5,7 +5,7 @@
 //  Copyright (c) 2014 Fyber. All rights reserved.
 //
 
-#import "GADRequest.h"
+#import <GoogleMobileAds/GoogleMobileAds.h>
 
 #import "SPAdMobNetwork.h"
 #import "SPAdMobInterstitialAdapter.h"
@@ -15,8 +15,8 @@
 
 // Adapter versioning - Remember to update the header
 static const NSInteger SPAdMobVersionMajor = 2;
-static const NSInteger SPAdMobVersionMinor = 0;
-static const NSInteger SPAdMobVersionPatch = 2;
+static const NSInteger SPAdMobVersionMinor = 1;
+static const NSInteger SPAdMobVersionPatch = 0;
 
 static NSString *const SPAdMobCoppaCompliance = @"SPAdMobIsCOPPACompliant";
 
@@ -56,26 +56,9 @@ static NSString *const SPAdMobTestDevices = @"SPAdMobTestDevices";
         BOOL isCOPPACompliant = [data[SPAdMobCoppaCompliance] boolValue];
         self.coppaComplicanceStatus = isCOPPACompliant ? SPAdmobCoppaComplianceEnabled : SPAdmobCoppaComplianceDisabled;
     }
-    self.testDevices = [self processTestDevices:data[SPAdMobTestDevices]];
+    self.testDevices = data[SPAdMobTestDevices];
 
     return YES;
 }
 
-// Checks if GAD_SIMULATOR_ID is contained in the test devices.
-// Likely to happen due to AdMob warning message
-- (NSArray *)processTestDevices:(NSArray *)testDevices
-{
-    if (!testDevices) {
-        return nil;
-    }
-
-    NSUInteger indexOfSimulator = [testDevices indexOfObject:@"GAD_SIMULATOR_ID"];
-    if (indexOfSimulator == NSNotFound) {
-        return testDevices;
-    }
-
-    NSMutableArray *mutableTestDevices = [NSMutableArray arrayWithArray:testDevices];
-    mutableTestDevices[indexOfSimulator] = GAD_SIMULATOR_ID;
-    return [mutableTestDevices copy];
-}
 @end

@@ -15,11 +15,13 @@
  
  ## Version compatibility
  
- - Adapter version: 2.0.2
- - Fyber SDK version: 7.0.2
- - AdMob SDK version: 6.12.2
- 
+ - Adapter version: 2.1.0
+
  */
+
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
+#error AdMob requires deployment target of 6.0 or higher
+#endif
 
 @interface SPAdMobInterstitialAdapter : NSObject<SPInterstitialNetworkAdapter>
 

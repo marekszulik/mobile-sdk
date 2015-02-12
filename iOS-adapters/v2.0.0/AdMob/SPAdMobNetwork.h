@@ -12,10 +12,8 @@
  
  ## Version compatibility
  
- - Adapter version: 2.0.2
- - Fyber SDK version: 7.0.2
- - AdMob SDK version: 6.12.2
- 
+ - Adapter version: 2.1.0
+
  */
 
 typedef NS_ENUM(NSInteger, SPCOPPAComplicanceStatus) {

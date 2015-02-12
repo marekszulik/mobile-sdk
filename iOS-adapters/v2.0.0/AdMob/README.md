@@ -4,8 +4,10 @@
 
 | Network | Adapter version | Third party SDK version | Fyber SDK version |
 |:----------:|:-------------:|:-----------------------:|:------------:|
-| AdMob | 2.0.2 | 6.12.2 | 7.0.2 |
+| AdMob | 2.1.0 | 7.0.0 | 7.0.3 + |
 
+**Important:** 
+>AdMob requires deployment target of 6.0 or higher
 
 ## Example parameters
 
@@ -13,12 +15,11 @@
 * **settings**:
 	* **SPAdMobInterstitialAdUnitId**
 	* **SPAdMobIsCOPPACompliant**: `YES` | `NO`
-	* **SPAdMobTestDevices**: 
-		*     `GAD_SIMULATOR_ID`
+	* **SPAdMobTestDevices**
 	
 ## Required frameworks
 
-* `AdSupport.framework` (Mark as Optional to support < iOS 6.0)
+* `AdSupport.framework` 
 * `AudioToolbox.framework`
 * `AVFoundation.framework`
 * `CoreGraphics.framework`
@@ -26,10 +27,5 @@
 * `EventKit.framework`
 * `EventKitUI.framework`
 * `MessageUI.framework`
-* `StoreKit.framework`  (Mark as Optional to support < iOS 6.0)
+* `StoreKit.framework` 
 * `SystemConfiguration.framework`
-
-
-## Required linker flags
-
-* `-ObjC`
