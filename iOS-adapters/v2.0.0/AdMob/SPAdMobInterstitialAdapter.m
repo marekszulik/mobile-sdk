@@ -7,10 +7,8 @@
 
 #import "SPAdMobInterstitialAdapter.h"
 #import "SPAdMobNetwork.h"
-#import "GADInterstitial.h"
-#import "GADInterstitialDelegate.h"
-
 #import "SPLogger.h"
+#import <GoogleMobileAds/GoogleMobileAds.h>
 
 static NSString *const SPAdMobAdUnitId = @"SPAdMobInterstitialAdUnitId";
 
@@ -95,7 +93,7 @@ static NSString *const SPAdMobAdUnitId = @"SPAdMobInterstitialAdUnitId";
 
 - (void)interstitial:(GADInterstitial *)ad didFailToReceiveAdWithError:(GADRequestError *)error
 {
-    NSString *message = [NSString stringWithFormat:@"%@ - Interstitial failed with error: Code %d Message %@", [self networkName], error.code, [error localizedDescription]];
+    NSString *message = [NSString stringWithFormat:@"%@ - Interstitial failed with error: Code %ld Message %@", [self networkName], (long)error.code, [error localizedDescription]];
 
     self.isInterstitialAvailable = NO;
 
