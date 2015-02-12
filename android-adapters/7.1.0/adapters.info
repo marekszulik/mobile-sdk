@@ -3,7 +3,6 @@
       {
          "qualifiedName":"com.sponsorpay.mediation.AdColonyMediationAdapter",
          "versions":[
-            "1.1.1",
             "1.1.3"
          ]
       },
