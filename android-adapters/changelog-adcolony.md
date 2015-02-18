@@ -4,7 +4,7 @@ Adapter: 1.1.3
 
 Fyber SDK: 7.1.0
 
-AdColony SDK: 2.2.0
+AdColony SDK: 2.2.1
 
 #Changelog
 
