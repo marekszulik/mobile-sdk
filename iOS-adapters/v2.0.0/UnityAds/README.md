@@ -6,7 +6,7 @@
 
 | Network | Adapter version | Third party SDK version | Fyber SDK version |
 |:----------:|:-------------:|:-----------------------:|:------------:|
-| Unity Ads | 2.4.1 | 1.3.10 | 7.0.3 + |
+| Unity Ads | 2.4.2 | 1.3.10 | 7.0.3 + |
 
 ## Migration guide from Fyber SDK 6.x to 7.x
 

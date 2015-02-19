@@ -17,9 +17,7 @@
 
  ## Version compatibility
 
- - Adapter version: 2.4.1
- - Fyber SDK version: 7.0.3
- - Unity Ads SDK version: 1.3.10
+ - Adapter version: 2.4.2
 
  */
 
