@@ -33,6 +33,17 @@ static NSString *const SPUnityAdsInterstitialZoneId = @"SPUnityAdsInterstitialZo
 {
     self.zoneId = dict[SPUnityAdsInterstitialZoneId];
     
+    if (!self.zoneId) {
+        SPLogError(@"Could not start %@ interstitial Provider. %@ empty or missing.", self.networkName, SPUnityAdsInterstitialZoneId);
+        return NO;
+    }
+    
+    // checks if zoneId contains at least one non-digit
+    if ([self.zoneId rangeOfCharacterFromSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]].location == NSNotFound) {
+        SPLogError(@"Could not start %@ interstitial Provider. %@ is not a valid %@", self.networkName, self.zoneId, SPUnityAdsInterstitialZoneId);
+        return NO;
+    }
+    
     // The `kUnityAdsOptionNoOfferscreenKey` parameter should always be passed with the `@YES` value
     self.showOptions = [[NSMutableDictionary alloc] initWithDictionary:@{
         kUnityAdsOptionVideoUsesDeviceOrientation: @YES,

@@ -34,6 +34,17 @@ static NSInteger const SPUnityAdsWrongZoneIdErrorCode = -1;
 {
     self.zoneId = dict[SPUnityAdsRewardedVideoZoneId];
     
+    if (!self.zoneId) {
+        SPLogError(@"Could not start %@ rewarded video Provider. %@ empty or missing.", self.networkName, SPUnityAdsRewardedVideoZoneId);
+        return NO;
+    }
+    
+    // checks if zoneId contains at least one non-digit
+    if ([self.zoneId rangeOfCharacterFromSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]].location == NSNotFound) {
+        SPLogError(@"Could not start %@ rewarded video Provider. %@ is not a valid %@", self.networkName, self.zoneId, SPUnityAdsRewardedVideoZoneId);
+        return NO;
+    }
+    
     // The `kUnityAdsOptionNoOfferscreenKey` parameter should always be passed with the `@YES` value
     self.showOptions = [[NSMutableDictionary alloc] initWithDictionary:@{
         kUnityAdsOptionVideoUsesDeviceOrientation: @YES,

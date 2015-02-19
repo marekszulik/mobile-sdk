@@ -21,7 +21,7 @@ static NSString *const SPInterstitialAdapterClassName = @"SPUnityAdsInterstitial
 // Adapter versioning - Remember to update the header
 static const NSInteger SPUnityAdsVersionMajor = 2;
 static const NSInteger SPUnityAdsVersionMinor = 4;
-static const NSInteger SPUnityAdsVersionPatch = 1;
+static const NSInteger SPUnityAdsVersionPatch = 2;
 
 @interface SPUnityAdsNetwork ()
 
@@ -79,6 +79,12 @@ static const NSInteger SPUnityAdsVersionPatch = 1;
 
     if (!gameId) {
         SPLogError(@"Could not start %@ Provider. %@ empty or missing.", self.name, SPUnityAdsGameId);
+        return NO;
+    }
+    
+    // checks if gameId is a positive integer
+    if ([gameId rangeOfCharacterFromSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]].location != NSNotFound) {
+        SPLogError(@"Could not start %@ Provider. %@ is not a valid %@", self.name, gameId, SPUnityAdsGameId);
         return NO;
     }
 
