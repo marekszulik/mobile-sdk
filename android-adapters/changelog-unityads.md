@@ -2,7 +2,7 @@
 
 Adapter: 2.2.3
 
-Fyber SDK: 7.0.0
+Fyber SDK: 7.1.0
 
 UnityAds SDK: 1.3.10
 
