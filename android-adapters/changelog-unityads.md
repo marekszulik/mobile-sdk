@@ -1,12 +1,16 @@
 #UnityAds current versions:
 
-Adapter: 2.2.0
+Adapter: 2.2.3
 
-Fyber SDK: 7.0.0
+Fyber SDK: 7.1.0
 
 UnityAds SDK: 1.3.10
 
 #Changelog
+
+####2.2.3
+
+- added Game ID and Zone ID validation
 
 ####2.2.2
 
