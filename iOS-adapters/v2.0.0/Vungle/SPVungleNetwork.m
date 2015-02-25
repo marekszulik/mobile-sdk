@@ -12,9 +12,14 @@
 
 static NSString *const SPVungleAppId = @"SPVungleAppId";
 static NSString *const SPVungleOrientation = @"SPVungleOrientation";
+static NSString *const SPVungleIncentivized = @"SPVungleIncentivized";
+static NSString *const SPVungleIncentivizedAlertTitleText = @"SPVungleIncentivizedAlertTitleText";
+static NSString *const SPVungleIncentivizedAlertBodyText = @"SPVungleIncentivizedAlertBodyText";
+static NSString *const SPVungleIncentivizedAlertCloseButtonText = @"SPVungleIncentivizedAlertCloseButtonText";
+static NSString *const SPVungleIncentivizedAlertContinueButtonText = @"SPVungleIncentivizedAlertContinueButtonText";
 
 static const NSInteger SPVungleVersionMajor = 2;
-static const NSInteger SPVungleVersionMinor = 3;
+static const NSInteger SPVungleVersionMinor = 4;
 static const NSInteger SPVungleVersionPatch = 0;
 
 static NSString *const SPRewardedVideoAdapterClassName = @"SPVungleRewardedVideoAdapter";
@@ -59,6 +64,11 @@ NSString *const SPVungleInterfaceOrientationMaskAllButUpsideDown = @"allButUpsid
     }
 
     self.orientation = data[SPVungleOrientation];
+    self.incentivized = data[SPVungleIncentivized];
+    self.incentivizedAlertTitleText = data[SPVungleIncentivizedAlertTitleText];
+    self.incentivizedAlertBodyText = data[SPVungleIncentivizedAlertBodyText];
+    self.incentivizedAlertCloseButtonText = data[SPVungleIncentivizedAlertCloseButtonText];
+    self.incentivizedAlertContinueButtonText = data[SPVungleIncentivizedAlertContinueButtonText];
 
     self.appId = appId;
     [[VungleSDK sharedSDK] startWithAppId:self.appId];

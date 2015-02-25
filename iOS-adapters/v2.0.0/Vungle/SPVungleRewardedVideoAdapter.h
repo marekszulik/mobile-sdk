@@ -17,9 +17,7 @@
  
  ## Version compatibility
  
- - Adapter version: 2.3.1
- - Fyber SDK version: 7.0.3
- - Vungle SDK version: 3.0.11
+ - Adapter version: 2.4.0
  
  */
 

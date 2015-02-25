@@ -46,6 +46,21 @@
     if (self.network.orientation.length) {
         [options setObject:@(self.network.orientationMask) forKey:VunglePlayAdOptionKeyOrientations];
     }
+    if (self.network.incentivized) {
+        [options setObject:self.network.incentivized forKey:VunglePlayAdOptionKeyIncentivized];
+    }
+    if (self.network.incentivizedAlertTitleText) {
+        [options setObject:self.network.incentivizedAlertTitleText forKey:VunglePlayAdOptionKeyIncentivizedAlertTitleText];
+    }
+    if (self.network.incentivizedAlertBodyText) {
+        [options setObject:self.network.incentivizedAlertBodyText forKey:VunglePlayAdOptionKeyIncentivizedAlertBodyText];
+    }
+    if (self.network.incentivizedAlertCloseButtonText) {
+        [options setObject:self.network.incentivizedAlertCloseButtonText forKey:VunglePlayAdOptionKeyIncentivizedAlertCloseButtonText];
+    }
+    if (self.network.incentivizedAlertContinueButtonText) {
+        [options setObject:self.network.incentivizedAlertContinueButtonText forKey:VunglePlayAdOptionKeyIncentivizedAlertContinueButtonText];
+    }
 
     NSError *error = nil;
     [[VungleSDK sharedSDK] playAd:parentVC withOptions:options error:&error];

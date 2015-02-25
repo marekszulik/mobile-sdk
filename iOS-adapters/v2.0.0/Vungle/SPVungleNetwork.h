@@ -15,9 +15,7 @@
  
  ## Version compatibility
  
- - Adapter version: 2.3.1
- - Fyber SDK version: 7.0.3
- - Vungle SDK version: 3.0.11
+ - Adapter version: 2.4.0
  
  */
 
@@ -26,5 +24,10 @@
 @property (nonatomic, copy) NSString *appId;
 @property (nonatomic, copy) NSString *orientation;
 @property (nonatomic, readonly) UIInterfaceOrientationMask orientationMask;
+@property (nonatomic, copy) NSNumber *incentivized;
+@property (nonatomic, copy) NSString *incentivizedAlertTitleText;
+@property (nonatomic, copy) NSString *incentivizedAlertBodyText;
+@property (nonatomic, copy) NSString *incentivizedAlertCloseButtonText;
+@property (nonatomic, copy) NSString *incentivizedAlertContinueButtonText;
 
 @end
