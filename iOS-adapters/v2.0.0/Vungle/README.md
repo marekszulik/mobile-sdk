@@ -4,7 +4,7 @@
 
 | Network | Adapter version | Third party SDK version | Fyber SDK version |
 |:----------:|:-------------:|:-----------------------:|:------------:|
-| Vungle | 2.3.1 | 3.0.11 | 7.0.3 |
+| Vungle | 2.4.0 | 3.0.12 | 7.1 |
 
 **Important:** *The Vungle SDK supports iOS 6 or higher.*
 
@@ -13,7 +13,12 @@
 * **name**: `Vungle`
 * **settings**:
 	* **SPVungleAppId**
-* **SPVungleOrientation**: `all` | `portrait` | `landscapeLeft` | `landscapeRight` | `portraitUpsideDown` | `landscape` | `allButUpsideDown`
+	* **SPVungleOrientation**: `all` | `portrait` | `landscapeLeft` | `landscapeRight` | `portraitUpsideDown` | `landscape` | `allButUpsideDown`
+	* **SPVungleIncentivized**: `YES` | `NO`
+	* **SPVungleIncentivizedAlertTitleText**: Any string
+	* **SPVungleIncentivizedAlertBodyText**: Any string
+	* **SPVungleIncentivizedAlertCloseButtonText**: Any string
+	* **SPVungleIncentivizedAlertContinueButtonText**: Any string
 
 
 ## Required frameworks

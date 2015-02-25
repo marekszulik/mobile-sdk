@@ -1,5 +1,10 @@
 # Vungle - adapter changelog
 
+####2.4.0
+
+ - Added support for Vungle SDK 3.0.12
+ - Added `SPVungleIncentivized`, `SPVungleIncentivizedAlertTitleText`, `SPVungleIncentivizedAlertBodyText`, `SPVungleIncentivizedAlertCloseButtonText` and `SPVungleIncentivizedAlertContinueButtonText` options to to the `.plist` file.
+
 ####2.3.1
 
  - Minor fixes
