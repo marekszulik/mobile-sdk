@@ -1,12 +1,15 @@
 #UnityAds current versions:
 
-Adapter: 2.2.3
-
-Fyber SDK: 7.1.0
-
-UnityAds SDK: 1.3.10
+| Adapter version | Third party SDK version | Fyber SDK version |
+|:-------------:|:-----------------------:|:------------:|
+| 2.2.4 | 1.3.10 | 7.1.0 |
+| 2.2.3 | 1.3.10 | 7.1.0 |
 
 #Changelog
+
+####2.2.4
+
+- improved flow for requesting interstitial ads
 
 ####2.2.3
 
