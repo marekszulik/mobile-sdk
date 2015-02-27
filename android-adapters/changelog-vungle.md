@@ -1,12 +1,16 @@
 #Vungle current versions:
 
-Adapter: 2.1.2
 
-Fyber SDK: 7.0.1
+| Adapter version | Third party SDK version | Fyber SDK version |
+|:-------------:|:-----------------------:|:------------:|
+| 2.1.2  |  3.1.2 - 3.2.2  |  7.0.1 |
+| 2.2.0  |  3.3.0          |  7.1.0 |
 
-Vungle SDK: 3.2.2
 
 #Changelog
+
+####2.2.0
+- Added support for Vungle SDK 3.3.0 (not backwards compatible)
 
 ####2.2.1
 
