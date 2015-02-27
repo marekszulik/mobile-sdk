@@ -16,7 +16,7 @@ FOUNDATION_EXPORT NSString *const SPAdColonyInterstitialZoneId;
  
  ## Version compatibility
  
- - Adapter version: 2.1.4
+ - Adapter version: 2.2.0
  
  */
 

@@ -14,8 +14,8 @@
 #import <AdColony/AdColony.h>
 
 static const NSInteger SPAdColonyVersionMajor = 2;
-static const NSInteger SPAdColonyVersionMinor = 1;
-static const NSInteger SPAdColonyVersionPatch = 4;
+static const NSInteger SPAdColonyVersionMinor = 2;
+static const NSInteger SPAdColonyVersionPatch = 0;
 
 static NSString *const SPAdColonyAppId = @"SPAdColonyAppId";
 NSString *const SPAdColonyV4VCZoneId = @"SPAdColonyV4VCZoneId";
@@ -79,6 +79,11 @@ static NSString *const SPRewardedVideoAdapterClassName = @"SPAdColonyRewardedVid
     NSString *appId = [appIdParam isKindOfClass:[NSString class]] ? appIdParam : nil;
     NSString *V4VCZoneId = [V4VCZoneIdParam isKindOfClass:[NSString class]] ? V4VCZoneIdParam : nil;
     NSString *interstitialZoneId = [interstitialZoneIdParam isKindOfClass:[NSString class]] ? interstitialZoneIdParam : nil;
+    
+    if (NSFoundationVersionNumber < NSFoundationVersionNumber_iOS_6_0) {
+        SPLogError(@"AdColony only supports iOS 6 or later");
+        return NO;
+    }
     
     if (!appId.length) {
         SPLogError(@"%@ Appid missing or empty", self.name);
