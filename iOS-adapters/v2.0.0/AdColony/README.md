@@ -6,7 +6,9 @@
 
 | Network | Adapter version | Third party SDK version | Fyber SDK version |
 |:----------:|:-------------:|:-----------------------:|:------------:|
-| AdColony | 2.1.4 | 2.4.13 | 7.0.3 + |
+| AdColony | 2.2.0 | 2.5.0 | 7.0.3 + |
+
+**Important:** *The AdColony SDK supports iOS 6 or higher.*
 
 ## Example parameters
 
@@ -34,7 +36,8 @@
 * `Social.framework` (Mark as Optional to support < iOS 6.0)
 * `StoreKit.framework` (Mark as Optional to support < iOS 6.0)
 * `SystemConfiguration.framework`
-         
+* `WebKit.framework` (Mark as Optional to support < iOS 8.0)
+        
 ## Required linker flags
-*  `ObjC`
-*  `objc-arc`
+*  `-ObjC`
+*  `-fobjc-arc`

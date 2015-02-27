@@ -1,5 +1,10 @@
 # AdColony - adapter changelog
 
+###2.2.0
+
+- Added Support for AdColony 2.5.0
+- Supports only iOS 6 or higher
+
 ####2.1.4
 
 - Fixed behaviour when the V4VC zone doesn't support virtual currency reward
