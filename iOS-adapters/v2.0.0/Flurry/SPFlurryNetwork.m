@@ -27,8 +27,8 @@ static NSString *const SPFlurryLogLevelAll = @"all";
 
 // Adapter versioning - Remember to update the header
 static const NSInteger SPFlurryVersionMajor = 2;
-static const NSInteger SPFlurryVersionMinor = 4;
-static const NSInteger SPFlurryVersionPatch = 1;
+static const NSInteger SPFlurryVersionMinor = 5;
+static const NSInteger SPFlurryVersionPatch = 0;
 
 
 static NSString *const SPFlurryRewardedVideoAdapterClassName = @"SPFlurryAppCircleClipsRewardedVideoAdapter";

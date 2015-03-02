@@ -65,7 +65,7 @@ static NSString *const SPFlurryInterstitialAdSpace = @"SPFlurryAdSpaceInterstiti
 {
     if (self.adInterstitial.ready) {
         self.wasAdClicked = NO;
-        [self.adInterstitial presentWithViewControler:viewController];
+        [self.adInterstitial presentWithViewController:viewController];
     } else {
         NSString *description = [NSString stringWithFormat:@"Interstitial for network %@ is not available", self.network.name];
         SPLogError(@"%@", description);

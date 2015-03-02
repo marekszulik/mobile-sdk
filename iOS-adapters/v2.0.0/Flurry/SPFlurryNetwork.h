@@ -13,9 +13,7 @@
  
  ## Version compatibility
  
- - Adapter version: 2.4.1
- - Fyber SDK version: 7.0.3
- - Flurry SDK version: 6.0.0
+ - Adapter version: 2.5.0
  
  */
 

@@ -67,7 +67,7 @@ static const NSInteger SPFlurryVideoNotReadyErrorCode = -4;
 {
     if ([self.adInterstitial ready]) {
         self.isVideoFullyWatched = NO;
-        [self.adInterstitial presentWithViewControler:parentVC];
+        [self.adInterstitial presentWithViewController:parentVC];
     } else {
         NSString *errorDescription = @"Flurry video is not ready";
         [self.delegate adapter:self
