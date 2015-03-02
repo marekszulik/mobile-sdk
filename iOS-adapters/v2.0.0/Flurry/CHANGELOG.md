@@ -1,5 +1,9 @@
 # Flurry for Advertisers - adapter changelog
 
+####2.5.0
+
+- Added support for Flurry 6.2.0
+
 ####2.4.1
 
 - Improved pre-caching logic for the rewarded video mediation adapter
